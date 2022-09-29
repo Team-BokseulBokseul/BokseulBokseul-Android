@@ -1,4 +1,5 @@
 # BokseulBokseul-Android
+
 ### **팀원**
 
 PM : 홍준혁
@@ -13,10 +14,10 @@ Server : 최지우, 조세훈
 
 ### **필요 스택**
 
-디자인 : 
+디자인 :
 figma
 
-iOS : 
+iOS :
 UIKit, MVC,
 XCode 13.2 / iOS 15
 SnapKit
@@ -26,7 +27,7 @@ CoreData, Realm
 
 Android 개발 : React Native
 
-Server : Spring Boot 
+Server : Spring Boot
 
 ### **프로젝트 설명**
 
@@ -45,3 +46,13 @@ Server : Spring Boot
 1. 매일 정신질환을 앓는 환자의 상태를 입력받으며, 환자 상태의 변화 추이를 의료진이나 심리 상담사가 시각적으로 볼 수 있다.
 
 2. 약물의 효능을 모르고 먹는 환자들에게 약물의 효능을 소개하여 안심하고 약을 복약할 수 있도록 돕는다.
+
+### **앱 실행 방법**
+
+1.  해당 repository를 pull 받습니다
+2.  해당 repository의 경로에 src폴더가 있는 것을 확인하고 npm i 를 칩니다
+3.  AppEntry.js 파일의 import App from '../../App';부분을 import App from '../../src/App'; 으로 수정합니다
+4.  expo start를 통해 expo를 실행시킵니다 (이 때 같은 네트워크에 있어야함!)
+5.  expo Go라는 앱을 설치해야 본인 폰에서 프로젝트를 실행할 수 있습니다
+6.  만약 안드로이드 에뮬레이터를 돌리고 싶다면 Android Studio에서 Virtual Device를 만들고 expo start해서 shift+a로 에뮬레이터 경로를 잡아주어야합니다 (비추천)
+7.  실행이 되지 않는다면 저한테 따로 연락주시길 바랍니다.
