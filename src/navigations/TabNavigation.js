@@ -49,9 +49,9 @@ export class Home extends React.Component {
         loadItemsForMonth={this.loadItems.bind(this)}
         // selected={"2017-05-16"}
         renderItem={this.renderItem.bind(this)}
-        onDayPress={(day) => {
-          alert("day pressed");
-        }}
+        // onDayPress={(day) => {
+        //   alert("day pressed");
+        // }}
         onCalendarToggled={(calendarOpened) => {}}
         // renderEmptyDate={this.renderEmptyDate.bind(this)}
         // rowHasChanged={this.rowHasChanged.bind(this)}
