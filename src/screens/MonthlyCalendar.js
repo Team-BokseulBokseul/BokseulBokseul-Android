@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { format } from "date-fns";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import { LocaleConfig, Calendar, Agenda } from "react-native-calendars";
 
@@ -46,8 +47,58 @@ LocaleConfig.locales["fr"] = {
 };
 LocaleConfig.defaultLocale = "fr";
 
+export function CalendarView() {
+  const posts = [
+    {
+      id: 1,
+      title: "제목입니다.",
+      contents: "내용입니다.",
+      date: "2022-02-26",
+    },
+    {
+      id: 2,
+      title: "제목입니다.",
+      contents: "내용입니다.",
+      date: "2022-02-27",
+    },
+  ];
+  const markedDates = posts.reduce((acc, current) => {
+    const formattedDate = format(new Date(current.date), "yyyy-MM-dd");
+    acc[formattedDate] = { marked: true };
+    return acc;
+  }, {});
+
+  const [selectedDate, setSelectedDate] = useState(
+    format(new Date(), "yyyy-MM-dd")
+  );
+  const markedSelectedDates = {
+    ...markedDates,
+    [selectedDate]: {
+      selected: true,
+      marked: markedDates[selectedDate]?.marked,
+    },
+  };
+
+  return (
+    <Calendar
+      style={styles.calendar}
+      markedDates={markedSelectedDates}
+      theme={{
+        selectedDayBackgroundColor: "#1B4B66",
+        arrowColor: "#1B4B66",
+        dotColor: "#1B4B66",
+        todayTextColor: "#1B4B66",
+      }}
+      onDayPress={(day) => {
+        setSelectedDate(day.dateString);
+      }}
+      enableSwipeMonths={true}
+    />
+  );
+}
+
 export const MonthlyCalendar = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+  // const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={{ marginTop: 50 }}>
@@ -57,17 +108,7 @@ export const MonthlyCalendar = () => {
           오늘의 날짜를 눌러 기분을 입력해주세요
         </Text>
       </View>
-      <Calendar
-        onDayPress={(day) => {
-          alert(day.dateString);
-        }}
-        theme={{
-          selectedDayBackgroundColor: "#009688",
-          arrowColor: "#009688",
-          dotColor: "#009688",
-          todayTextColor: "#009688",
-        }}
-      />
+      <CalendarView></CalendarView>
     </View>
   );
 };
@@ -85,5 +126,9 @@ const styles = StyleSheet.create({
     height: 15,
     flex: 1,
     paddingTop: 30,
+  },
+  calendar: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#e0e0e0",
   },
 });
