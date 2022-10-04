@@ -1,6 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  Button,
+} from "react-native";
 import { LocaleConfig, Calendar, Agenda } from "react-native-calendars";
 
 LocaleConfig.locales["fr"] = {
@@ -59,7 +67,8 @@ export const MonthlyCalendar = () => {
       </View>
       <Calendar
         onDayPress={(day) => {
-          alert(day.dateString);
+          //  alert(day.dateString);/
+          setModalVisible(true);
         }}
         theme={{
           selectedDayBackgroundColor: "#009688",
@@ -85,5 +94,10 @@ const styles = StyleSheet.create({
     height: 15,
     flex: 1,
     paddingTop: 30,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
