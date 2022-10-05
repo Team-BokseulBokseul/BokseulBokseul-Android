@@ -1,7 +1,15 @@
 import React from "react";
 import { useState } from "react";
 import { format } from "date-fns";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  Switch,
+} from "react-native";
 import { LocaleConfig, Calendar, Agenda } from "react-native-calendars";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -82,6 +90,9 @@ export function CalendarView() {
 
   const [modalVisible, setModalVisible] = useState(false);
 
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
   return (
     <View>
       <Calendar
@@ -110,7 +121,79 @@ export function CalendarView() {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalTitle}>하루 기록</Text>
+              <View style={{ flexDirection: "row" }}>
+                <Text style={styles.modalTitle}>하루 기록</Text>
+              </View>
+              <View style={styles.modalBackground}>
+                <View style={[styles.modalBox, { marginBottom: 0 }]}>
+                  <Text style={styles.modalText}>기분을 선택해줘</Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginBottom: 0,
+                  }}
+                >
+                  <View
+                    style={[
+                      styles.modalBox,
+                      styles.modalHalfBox,
+                      { marginBottom: 0 },
+                    ]}
+                  >
+                    <Text style={styles.modalText}>어제 수면 시간</Text>
+                  </View>
+                  <View
+                    style={[
+                      styles.modalBox,
+                      styles.modalHalfBox,
+                      { marginBottom: 0 },
+                    ]}
+                  >
+                    <Text style={styles.modalText}>약 복용</Text>
+                  </View>
+                </View>
+                <View
+                  style={[
+                    styles.modalBox,
+                    { flexDirection: "row", justifyContent: "space-between" },
+                  ]}
+                >
+                  <Text style={styles.modalText}>
+                    하루 동안 유의미한 감정 기복이 있었어?
+                  </Text>
+                  <Switch
+                    trackColor={{ false: "#767577", true: "#1B4B66" }}
+                    onValueChange={toggleSwitch}
+                    value={isEnabled}
+                    style={{ margin: 5 }}
+                  />
+                </View>
+                <View>
+                  <Text
+                    style={{ fontSize: 20, fontWeight: "bold", margin: 10 }}
+                  >
+                    오늘의 질문
+                  </Text>
+                  <Text
+                    style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}
+                  >
+                    1. 약을 먹고 불편한 점이 있었다면 자세히 알려줘
+                  </Text>
+                  <Text
+                    style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}
+                  >
+                    2. 특별한 생활 사건들에 대해 자세히 알려줘
+                  </Text>
+                  <Text
+                    style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}
+                  >
+                    3. 오늘 하루를 떠올리고 아래 표에서 어울리는 나의 상태를
+                    골라줘
+                  </Text>
+                </View>
+              </View>
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}
@@ -177,6 +260,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    padding: 0,
+    paddingTop: 37,
   },
   button: {
     borderRadius: 20,
@@ -199,5 +284,25 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: "24px",
     fontWeight: "bold",
+  },
+  modalBackground: {
+    backgroundColor: "#EFEFF0",
+    borderRadius: 16,
+    margin: 0,
+    marginBottom: 10,
+    width: "90%",
+  },
+  modalBox: {
+    backgroundColor: "white",
+    margin: 10,
+    borderRadius: 16,
+  },
+  modalHalfBox: {
+    // width: "50%",
+  },
+  modalText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    margin: 10,
   },
 });
