@@ -2,16 +2,20 @@ import React from "react";
 import { useState } from "react";
 import { format } from "date-fns";
 import {
-  Alert,
   Modal,
   StyleSheet,
   Text,
   Pressable,
   View,
   Switch,
+  TouchableOpacity,
+  Image,
+  TextInput,
+  Keyboard,
 } from "react-native";
 import { LocaleConfig, Calendar, Agenda } from "react-native-calendars";
-import { SafeAreaView } from "react-native-safe-area-context";
+import RNPickerSelect from "./StateSelector.js";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 LocaleConfig.locales["fr"] = {
   monthNames: [
@@ -55,6 +59,21 @@ LocaleConfig.locales["fr"] = {
   today: "오늘",
 };
 LocaleConfig.defaultLocale = "fr";
+
+const InputText = () => {
+  const [number, onChangeNumber] = React.useState(null);
+
+  return (
+    <View style={{ alignContent: "center" }}>
+      <TextInput
+        multiline
+        style={styles.input}
+        onChangeText={onChangeNumber}
+        editable
+      />
+    </View>
+  );
+};
 
 export function CalendarView() {
   const posts = [
@@ -110,6 +129,7 @@ export function CalendarView() {
         }}
         enableSwipeMonths={true}
       />
+
       <View style={styles.centeredView}>
         <Modal
           animationType="slide"
@@ -127,31 +147,140 @@ export function CalendarView() {
               <View style={styles.modalBackground}>
                 <View style={[styles.modalBox, { marginBottom: 0 }]}>
                   <Text style={styles.modalText}>기분을 선택해줘</Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      margin: 10,
+                    }}
+                  >
+                    <View>
+                      <TouchableOpacity>
+                        <Image
+                          style={{
+                            borderRadius: 100,
+                            overflow: "hidden",
+                          }}
+                          source={require("../../image/joy.png")}
+                        />
+                      </TouchableOpacity>
+                      <Text style={{ textAlign: "center", marginTop: 5 }}>
+                        기쁨
+                      </Text>
+                    </View>
+                    <View>
+                      <TouchableOpacity>
+                        <Image
+                          style={{
+                            borderRadius: 100,
+                            overflow: "hidden",
+                          }}
+                          source={require("../../image/calm.png")}
+                        />
+                      </TouchableOpacity>
+                      <Text style={{ textAlign: "center", marginTop: 5 }}>
+                        평온
+                      </Text>
+                    </View>
+                    <View>
+                      <TouchableOpacity>
+                        <Image
+                          style={{
+                            borderRadius: 100,
+                            overflow: "hidden",
+                          }}
+                          source={require("../../image/hard.png")}
+                        />
+                      </TouchableOpacity>
+                      <Text style={{ textAlign: "center", marginTop: 5 }}>
+                        힘듦
+                      </Text>
+                    </View>
+                    <View>
+                      <TouchableOpacity>
+                        <Image
+                          style={{
+                            borderRadius: 100,
+                            overflow: "hidden",
+                          }}
+                          source={require("../../image/sad.png")}
+                        />
+                      </TouchableOpacity>
+                      <Text style={{ textAlign: "center", marginTop: 5 }}>
+                        슬픔
+                      </Text>
+                    </View>
+                    <View>
+                      <TouchableOpacity>
+                        <Image
+                          style={{
+                            borderRadius: 100,
+                            overflow: "hidden",
+                          }}
+                          source={require("../../image/tired.png")}
+                        />
+                      </TouchableOpacity>
+                      <Text style={{ textAlign: "center", marginTop: 5 }}>
+                        피곤
+                      </Text>
+                    </View>
+                    <View>
+                      <TouchableOpacity>
+                        <Image
+                          style={{
+                            borderRadius: 100,
+                            overflow: "hidden",
+                          }}
+                          source={require("../../image/angry.png")}
+                        />
+                      </TouchableOpacity>
+                      <Text style={{ textAlign: "center", marginTop: 5 }}>
+                        화남
+                      </Text>
+                    </View>
+                  </View>
                 </View>
                 <View
                   style={{
                     flexDirection: "row",
-                    justifyContent: "space-between",
+                    justifyContent: "space-around",
                     marginBottom: 0,
                   }}
                 >
-                  <View
-                    style={[
-                      styles.modalBox,
-                      styles.modalHalfBox,
-                      { marginBottom: 0 },
-                    ]}
-                  >
+                  <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
                     <Text style={styles.modalText}>어제 수면 시간</Text>
                   </View>
-                  <View
-                    style={[
-                      styles.modalBox,
-                      styles.modalHalfBox,
-                      { marginBottom: 0 },
-                    ]}
-                  >
-                    <Text style={styles.modalText}>약 복용</Text>
+                  <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
+                    <Text style={[styles.modalText, { marginBottom: 0 }]}>
+                      약 복용
+                    </Text>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "flex-end",
+                      }}
+                    >
+                      <TouchableOpacity>
+                        <Image
+                          style={{
+                            borderRadius: 100,
+                            overflow: "hidden",
+                            margin: 3,
+                          }}
+                          source={require("../../image/eatyet.png")}
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity>
+                        <Image
+                          style={{
+                            borderRadius: 100,
+                            overflow: "hidden",
+                            margin: 3,
+                          }}
+                          source={require("../../image/eat.png")}
+                        />
+                      </TouchableOpacity>
+                    </View>
                   </View>
                 </View>
                 <View
@@ -181,17 +310,20 @@ export function CalendarView() {
                   >
                     1. 약을 먹고 불편한 점이 있었다면 자세히 알려줘
                   </Text>
+                  <InputText />
                   <Text
                     style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}
                   >
                     2. 특별한 생활 사건들에 대해 자세히 알려줘
                   </Text>
+                  <InputText />
                   <Text
                     style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}
                   >
                     3. 오늘 하루를 떠올리고 아래 표에서 어울리는 나의 상태를
                     골라줘
                   </Text>
+                  <RNPickerSelect />
                 </View>
               </View>
               <Pressable
@@ -250,10 +382,10 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: "100%",
-    height: "90%",
-    margin: 20,
+    height: "92%",
     backgroundColor: "white",
-    borderRadius: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     padding: 35,
     alignItems: "center",
     shadowColor: "#000",
@@ -261,7 +393,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
     padding: 0,
-    paddingTop: 37,
+    paddingTop: 30,
   },
   button: {
     borderRadius: 20,
@@ -282,7 +414,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     marginBottom: 15,
     textAlign: "center",
-    fontSize: "24px",
+    fontSize: 24,
     fontWeight: "bold",
   },
   modalBackground: {
@@ -298,11 +430,24 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   modalHalfBox: {
-    // width: "50%",
+    backgroundColor: "white",
+    marginTop: 10,
+    marginBottom: 10,
+    borderRadius: 16,
+    width: "45%",
   },
   modalText: {
     fontSize: 16,
     fontWeight: "bold",
     margin: 10,
+  },
+  input: {
+    backgroundColor: "#D9D9D9",
+    width: "90%",
+    height: 100,
+    borderRadius: 9,
+    margin: "5%",
+    marginTop: 0,
+    marginBottom: 0,
   },
 });
