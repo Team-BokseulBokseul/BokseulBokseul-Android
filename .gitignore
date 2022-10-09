@@ -1,2 +1,3 @@
 node_modules
 .expo
+!BokseulBokseul-Android/node_modules/react-native/template/android/app\src/main/AndroidManifest.xml

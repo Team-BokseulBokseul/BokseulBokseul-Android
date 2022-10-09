@@ -12,10 +12,14 @@ import {
   Image,
   TextInput,
   Keyboard,
+  KeyboardAvoidingView,
 } from "react-native";
 import { LocaleConfig, Calendar, Agenda } from "react-native-calendars";
 import RNPickerSelect from "./StateSelector.js";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import {
+  ScrollView,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
 
 LocaleConfig.locales["fr"] = {
   monthNames: [
@@ -144,7 +148,7 @@ export function CalendarView() {
               <View style={{ flexDirection: "row" }}>
                 <Text style={styles.modalTitle}>하루 기록</Text>
               </View>
-              <View style={styles.modalBackground}>
+              <ScrollView style={styles.modalBackground}>
                 <View style={[styles.modalBox, { marginBottom: 0 }]}>
                   <Text style={styles.modalText}>기분을 선택해줘</Text>
                   <View
@@ -325,7 +329,7 @@ export function CalendarView() {
                   </Text>
                   <RNPickerSelect />
                 </View>
-              </View>
+              </ScrollView>
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}
