@@ -26,11 +26,11 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name={"hi"}
+        name={" "}
         component={EmptyScreen}
         options={{
           tabBarIcon: ({ focused }) => (
-            <TouchableOpacity onPress={() => navigation.navigate("hi")}>
+            <TouchableOpacity onPress={() => navigation.navigate(" ")}>
               <View
                 style={{
                   width: 55,

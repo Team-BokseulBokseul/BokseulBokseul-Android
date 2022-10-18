@@ -270,6 +270,8 @@ export function CalendarView() {
                             borderRadius: 100,
                             overflow: "hidden",
                             margin: 3,
+                            height: 50,
+                            width: 50,
                           }}
                           source={require("../../image/eatyet.png")}
                         />
