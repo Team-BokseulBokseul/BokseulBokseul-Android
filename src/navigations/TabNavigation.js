@@ -18,19 +18,28 @@ const TabNavigation = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Calendar"
+        name="Home"
         component={MonthlyCalendar}
         options={{
           headerShown: false,
-          tabBarIcon: (props) => TabIcon({ ...props, name: "calendar" }),
+          tabBarIcon: (props) => TabIcon({ ...props, name: "home" }),
+          tabBarActiveTintColor: "#1B4B66",
         }}
       />
       <Tab.Screen
-        name={"hi"}
+        name="History"
+        component={EmptyScreen}
+        options={{
+          tabBarIcon: (props) => TabIcon({ ...props, name: "history" }),
+          tabBarActiveTintColor: "#1B4B66",
+        }}
+      />
+      <Tab.Screen
+        name={" "}
         component={EmptyScreen}
         options={{
           tabBarIcon: ({ focused }) => (
-            <TouchableOpacity onPress={() => navigation.navigate("hi")}>
+            <TouchableOpacity onPress={() => navigation.navigate(" ")}>
               <View
                 style={{
                   width: 55,
@@ -57,11 +66,19 @@ const TabNavigation = () => {
         }}
       ></Tab.Screen>
       <Tab.Screen
-        name="TODO List"
-        component={Home}
+        name="Add"
+        component={EmptyScreen}
         options={{
-          headerShown: false,
+          tabBarIcon: (props) => TabIcon({ ...props, name: "pill" }),
+          tabBarActiveTintColor: "#1B4B66",
+        }}
+      />
+      <Tab.Screen
+        name="Account"
+        component={Account}
+        options={{
           tabBarIcon: (props) => TabIcon({ ...props, name: "calendar-check" }),
+          tabBarActiveTintColor: "#1B4B66",
         }}
       />
     </Tab.Navigator>
@@ -79,6 +96,13 @@ function Home() {
   return (
     <View>
       <Text>Hello</Text>
+    </View>
+  );
+}
+function Account() {
+  return (
+    <View>
+      <Text>Account</Text>
     </View>
   );
 }
